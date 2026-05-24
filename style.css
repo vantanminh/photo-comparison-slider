@@ -195,3 +195,107 @@ body { background-color: var(--bg-dark); color: var(--text-main); padding-bottom
 .gallery-item img, .img-wrapper img {
     cursor: zoom-in;
 }
+
+/* --- MOBILE OPTIMIZATION --- */
+@media screen and (max-width: 768px) {
+    /* Container full width trên mobile */
+    body { padding-bottom: 80px; }
+    .container { padding: 0 12px; }
+
+    /* Header nhỏ gọn hơn */
+    .header { padding: 50px 16px 30px; }
+    .header h1 { font-size: 1.8rem; }
+    .header p { font-size: 0.9rem; }
+
+    /* Section spacing */
+    .gallery-section, .comparison-section { margin-top: 35px; }
+    .section-title { font-size: 1.2rem; }
+    .section-desc { font-size: 0.85rem; margin-bottom: 20px; }
+
+    /* Gallery grid - 1 cột trên mobile nhỏ */
+    .gallery-grid { gap: 16px; }
+
+    /* COMPARISON SLIDER - LỚN HƠN TRÊN MOBILE */
+    .comparison-slider {
+        aspect-ratio: 4 / 3; /* Rộng hơn để xem rõ hơn */
+        border-radius: var(--radius-md);
+        margin: 0 -4px; /* Full bleed */
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px -5px var(--primary-glow);
+    }
+
+    /* Nút slider to hơn để dễ kéo */
+    .slider-button::after {
+        width: 52px;
+        height: 52px; /* Lớn hơn 44px */
+        background-size: 24px 24px;
+    }
+
+    /* Label nhỏ hơn trên mobile */
+    .label {
+        bottom: 16px;
+        padding: 6px 12px;
+        font-size: 0.7rem;
+    }
+    .label-left { left: 16px; }
+    .label-right { right: 16px; }
+
+    /* Comparison selector - nút lớn hơn, dễ bấm hơn */
+    .comparison-selector {
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .select-thumb {
+        padding: 6px 12px 6px 6px;
+        gap: 8px;
+    }
+
+    .select-thumb img {
+        width: 44px; /* Lớn hơn 50px nhưng fit hơn */
+        border-radius: 6px;
+    }
+
+    .select-thumb span {
+        font-size: 0.75rem;
+    }
+
+    /* Lightbox tối ưu mobile */
+    .lightbox-content {
+        max-width: 95%;
+        max-height: 75vh;
+    }
+
+    .lightbox-close {
+        top: 20px;
+        right: 20px;
+        font-size: 32px;
+    }
+
+    .lightbox-caption {
+        bottom: 20px;
+        font-size: 0.8rem;
+        padding: 8px 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Mobile nhỏ - tối đa diện tích */
+    .comparison-slider {
+        aspect-ratio: 1 / 1; /* Vuông để xem rõ nhất */
+        border-radius: 0;
+        margin: 0 -12px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 cột cho ảnh nhỏ */
+        gap: 12px;
+    }
+
+    .select-thumb img {
+        width: 40px;
+    }
+
+    .select-thumb span {
+        font-size: 0.7rem;
+    }
+}
