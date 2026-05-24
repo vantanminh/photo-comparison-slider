@@ -217,16 +217,16 @@ body { background-color: var(--bg-dark); color: var(--text-main); padding-bottom
 
     /* COMPARISON SLIDER - LỚN HƠN TRÊN MOBILE */
     .comparison-slider {
-        aspect-ratio: 4 / 3; /* Rộng hơn để xem rõ hơn */
+        aspect-ratio: 4 / 3;
         border-radius: var(--radius-md);
-        margin: 0 -4px; /* Full bleed */
+        width: 100%;
         box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 30px -5px var(--primary-glow);
     }
 
     /* Nút slider to hơn để dễ kéo */
     .slider-button::after {
         width: 52px;
-        height: 52px; /* Lớn hơn 44px */
+        height: 52px;
         background-size: 24px 24px;
     }
 
@@ -251,7 +251,7 @@ body { background-color: var(--bg-dark); color: var(--text-main); padding-bottom
     }
 
     .select-thumb img {
-        width: 44px; /* Lớn hơn 50px nhưng fit hơn */
+        width: 44px;
         border-radius: 6px;
     }
 
@@ -281,13 +281,12 @@ body { background-color: var(--bg-dark); color: var(--text-main); padding-bottom
 @media screen and (max-width: 480px) {
     /* Mobile nhỏ - tối đa diện tích */
     .comparison-slider {
-        aspect-ratio: 1 / 1; /* Vuông để xem rõ nhất */
-        border-radius: 0;
-        margin: 0 -12px;
+        aspect-ratio: 1 / 1;
+        border-radius: var(--radius-md);
     }
 
     .gallery-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 cột cho ảnh nhỏ */
+        grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
 
