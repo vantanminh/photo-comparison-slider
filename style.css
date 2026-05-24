@@ -113,3 +113,85 @@ body { background-color: var(--bg-dark); color: var(--text-main); padding-bottom
 .select-thumb.active span {
     color: var(--primary-light);
 }
+/* --- PHẦN 3: LIGHTBOX XEM ẢNH PHÓNG TO --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000; /* Hiển thị trên cùng tuyệt đối */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(14, 16, 19, 0.95); /* Đồng bộ với --bg-dark */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Kích hoạt hiển thị dạng Flexbox */
+.lightbox.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* Thao tác hiển thị hình ảnh bên trong */
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 82vh;
+    border-radius: var(--radius-md);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 0 0 40px var(--primary-glow);
+    border: 1px solid var(--border-color);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    object-fit: contain;
+}
+
+.lightbox.show .lightbox-content {
+    transform: scale(1);
+}
+
+/* Nút đóng (X) */
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: var(--text-muted);
+    font-size: 38px;
+    font-weight: 300;
+    transition: var(--transition);
+    cursor: pointer;
+    user-select: none;
+    z-index: 2001;
+}
+
+.lightbox-close:hover {
+    color: var(--primary);
+    transform: scale(1.1) rotate(90deg);
+}
+
+/* Dòng text mô tả dưới ảnh */
+.lightbox-caption {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: var(--bg-glass);
+    padding: 10px 24px;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    pointer-events: none;
+}
+
+/* Thêm biểu tượng con trỏ kính lúp khi rê chuột vào ảnh có thể phóng to */
+.gallery-item img, .img-wrapper img {
+    cursor: zoom-in;
+}
