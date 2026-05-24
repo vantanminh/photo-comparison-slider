@@ -1,68 +1,126 @@
-/* Reset CSS cơ bản */
+/* --- HỆ THỐNG BIẾN MÀU (THEME VARIABLES) --- */
+:root {
+    --primary: #e2875e;          /* Cam dịu nghệ thuật (Soft Terracotta) */
+    --primary-glow: rgba(226, 135, 94, 0.15);
+    --primary-light: #f4b293;
+    
+    --bg-dark: #0e1013;          /* Nền tối sâu sang trọng */
+    --bg-card: #171b22;          /* Nền thẻ chứa ảnh */
+    --bg-glass: rgba(23, 27, 34, 0.7);
+    
+    --text-main: #f1f5f9;
+    --text-muted: #8a99ad;
+    --border-color: rgba(255, 255, 255, 0.05);
+    
+    --radius-lg: 16px;
+    --radius-md: 10px;
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Kéo thả/Hover siêu mượt */
+}
+
+/* Reset & Nền tảng */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-    background-color: #0f1115;
-    color: #e2e8f0;
-    padding-bottom: 60px;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    padding-bottom: 80px;
+    line-height: 1.5;
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 24px;
 }
 
-/* Header */
+/* --- HEADER NGHỆ THUẬT --- */
 .header {
     text-align: center;
-    padding: 60px 20px;
-    background: linear-gradient(to bottom, #1a1f2c, #0f1115);
+    padding: 80px 24px 50px;
+    position: relative;
+}
+
+/* Tạo một đốm sáng cam mờ ảo phía sau Header làm điểm nhấn */
+.header::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 150px;
+    background: var(--primary);
+    filter: blur(120px);
+    opacity: 0.12;
+    pointer-events: none;
 }
 
 .header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: -0.05em;
-    margin-bottom: 10px;
-    color: #fff;
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #ffffff 40%, var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .header p {
-    color: #94a3b8;
-    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    font-weight: 400;
 }
 
-/* Section Common */
+/* Tiêu đề các mục */
 .section-title {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-    color: #f8fafc;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Chấm cam nhỏ trước tiêu đề tạo điểm nhấn tinh tế */
+.section-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .section-desc {
-    color: #64748b;
-    margin-bottom: 24px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 28px;
 }
 
 .comparison-section, .gallery-section {
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
-/* --- UI Slider So Sánh Ảnh --- */
+/* --- SLIDER SO SÁNH ẢNH (PREMIUM DESIGN) --- */
 .comparison-slider {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9; /* Định hình khung ảnh cố định tránh vỡ layout */
-    border-radius: 12px;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-    --slider-pos: 50%; /* Biến CSS kiểm soát vị trí cắt ảnh */
+    background-color: #000;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), 
+                0 0 50px -10px var(--primary-glow);
+    --slider-pos: 50%;
 }
 
 .img-wrapper {
@@ -80,32 +138,34 @@ body {
     display: block;
 }
 
-/* Xử lý ảnh đè phía trên (Camera) */
 .foreground-img {
-    /* Cắt ảnh mượt mà từ trái qua dựa trên biến CSS */
     clip-path: polygon(0 0, var(--slider-pos) 0, var(--slider-pos) 100%, 0 100%);
 }
 
-/* Nhãn text (Camera / iPhone) */
+/* Nhãn ghi chú iPhone / Camera dạng Glassmorphism */
 .label {
     position: absolute;
-    bottom: 20px;
-    padding: 6px 14px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-    color: #fff;
-    font-size: 0.85rem;
-    border-radius: 20px;
+    bottom: 24px;
+    padding: 8px 16px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-main);
+    font-size: 0.8rem;
+    border-radius: 30px;
     font-weight: 600;
-    letter-spacing: 0.05em;
-    pointer-events: none; /* Không cản trở việc kéo chuột */
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    pointer-events: none;
     user-select: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-.label-left { left: 20px; }
-.label-right { right: 20px; }
+.label-left { left: 24px; }
+.label-right { right: 24px; }
 
-/* Thanh kéo ngầm phủ toàn bộ khung */
+/* Thanh input kéo ngầm */
 .slider-input {
     position: absolute;
     inset: 0;
@@ -116,66 +176,91 @@ body {
     z-index: 10;
 }
 
-/* Đường vạch kẻ và nút tròn phân tách ở giữa */
+/* Vạch ngăn cách dọc ở giữa */
 .slider-button {
     position: absolute;
     top: 0;
     bottom: 0;
     left: var(--slider-pos);
-    width: 3px;
-    background: #ffffff;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.4) 80%, transparent);
     transform: translateX(-50%);
     pointer-events: none;
     z-index: 5;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
+/* Nút tròn điều khiển với thiết kế tối giản, viền cam phát sáng nhẹ */
 .slider-button::after {
     content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     background-color: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>');
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1), 
+                0 8px 24px rgba(0, 0, 0, 0.4),
+                0 0 20px var(--primary);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23e2875e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m17 18 5-6-5-6M7 6l-5 6 5 6"/></svg>');
     background-repeat: no-repeat;
     background-position: center;
+    transition: transform 0.2s ease;
 }
 
-/* --- UI Gallery Grid --- */
+/* Hiệu ứng phóng to nhẹ nút tròn khi rê chuột vào vùng slider */
+.comparison-slider:hover .slider-button::after {
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* --- BỘ SƯU TẬP ẢNH GRID --- */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 28px;
 }
 
 .gallery-item {
-    background: #1e293b;
-    border-radius: 8px;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.gallery-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
 }
 
 .gallery-item img {
     width: 100%;
-    aspect-ratio: 3/2;
+    aspect-ratio: 3 / 2;
     object-fit: cover;
     display: block;
+    transition: var(--transition);
+    filter: brightness(0.95);
 }
 
 .item-info {
-    padding: 16px;
-    font-size: 0.95rem;
-    font-weight: 500;
+    padding: 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
     color: #cbd5e1;
+    letter-spacing: -0.01em;
+    transition: var(--transition);
+}
+
+/* --- HIỆU ỨNG HOVER SIÊU MƯỢT CHO GRID --- */
+.gallery-item:hover {
+    transform: translateY(-6px);
+    border-color: rgba(226, 135, 94, 0.25); /* Hiện viền cam rất nhẹ */
+    box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.4), 
+                0 0 20px -5px var(--primary-glow);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.03); /* Ảnh zoom nhẹ bên trong khung */
+    filter: brightness(1.05); /* Tăng độ sáng bừng lên khi tương tác */
+}
+
+.gallery-item:hover .item-info {
+    color: var(--primary-light); /* Chữ đổi sang tone cam dịu */
 }
