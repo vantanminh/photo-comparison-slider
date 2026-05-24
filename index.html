@@ -3,62 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Showcase & Comparison</title>
+    <title>Photo Showcase & Dynamic Comparison</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header class="header">
         <h1>Visual Studio Showcase</h1>
-        <p>Trưng bày và so sánh chất lượng hình ảnh giữa Máy ảnh chuyên nghiệp & iPhone</p>
+        <p>Trưng bày toàn bộ tác phẩm và so sánh trực quan chi tiết giữa Camera & iPhone</p>
     </header>
 
     <main class="container">
-        <!-- SECTION 1: SO SÁNH ẢNH (SLIDER) -->
-        <section class="comparison-section">
-            <h2 class="section-title">So sánh trực quan (Slider)</h2>
-            <p class="section-desc">Kéo thanh trượt ở giữa để so sánh chi tiết giữa hai thiết bị</p>
-            
-            <div class="comparison-slider" id="imageSlider">
-                <!-- Ảnh gốc bên dưới (iPhone) -->
-                <div class="img-wrapper backup-img">
-                    <img src="./photos/i-phone/IMG_1454-edited.JPG" alt="iPhone Capture">
-                    <span class="label label-left">iPhone</span>
-                </div>
-                
-                <!-- Ảnh đè bên trên (Camera) sẽ bị clip dựa theo thanh cuộn -->
-                <div class="img-wrapper foreground-img">
-                    <img src="./photos/camera/photo1.jpg" alt="Camera Capture">
-                    <span class="label label-right">Camera</span>
-                </div>
-                
-                <!-- Thanh điều khiển -->
-                <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Percentage of comparison image shown">
-                <div class="slider-button"></div>
-            </div>
-        </section>
-
-        <!-- SECTION 2: SHOWROOM ẢNH CHỤP TỪ MÁY ẢNH -->
+        
+        <!-- PHẦN 1: SHOW TOÀN BỘ ẢNH TỪ MÁY ẢNH (GALLERY) -->
         <section class="gallery-section">
             <h2 class="section-title">Bộ sưu tập từ Máy Ảnh (Camera)</h2>
-            <p class="section-desc">Các tác phẩm chất lượng cao được chụp từ máy ảnh chuyên nghiệp</p>
+            <p class="section-desc">Không gian trưng bày các tác phẩm chất lượng cao nguyên bản từ máy ảnh chuyên nghiệp</p>
             
             <div class="gallery-grid">
-                <!-- Các item ảnh mẫu (Thay đổi tên file tương ứng với folder của bạn) -->
                 <div class="gallery-item">
                     <img src="./photos/camera/photo1.jpg" alt="Camera Shot 1">
-                    <div class="item-info">Photo #1 - Camera</div>
+                    <div class="item-info">Photo #01 - Landscape</div>
                 </div>
                 <div class="gallery-item">
                     <img src="./photos/camera/photo2.jpg" alt="Camera Shot 2">
-                    <div class="item-info">Photo #2 - Camera</div>
+                    <div class="item-info">Photo #02 - Portrait</div>
                 </div>
                 <div class="gallery-item">
                     <img src="./photos/camera/photo3.jpg" alt="Camera Shot 3">
-                    <div class="item-info">Photo #3 - Camera</div>
+                    <div class="item-info">Photo #03 - Nightscape</div>
                 </div>
+                <!-- Bạn có thể thêm bao nhiêu ảnh tùy thích ở đây -->
             </div>
         </section>
+
+        <!-- PHẦN 2: SO SÁNH NHIỀU ẢNH (MULTI-COMPARISON) -->
+        <section class="comparison-section">
+            <h2 class="section-title">So sánh chi tiết (Multi-Slider)</h2>
+            <p class="section-desc">Chọn một góc chụp bên dưới để nạp ảnh vào thanh trượt so sánh</p>
+            
+            <!-- Khung Slider chính -->
+            <div class="comparison-slider" id="imageSlider">
+                <!-- Ảnh iPhone (Nền dưới) -->
+                <div class="img-wrapper backup-img">
+                    <img id="iphoneView" src="./photos/i-phone/photo1.jpg" alt="iPhone View">
+                    <span class="label label-left">iPhone</span>
+                </div>
+                
+                <!-- Ảnh Camera (Đè bên trên) -->
+                <div class="img-wrapper foreground-img">
+                    <img id="cameraView" src="./photos/camera/photo1.jpg" alt="Camera View">
+                    <span class="label label-right">Camera</span>
+                </div>
+                
+                <input type="range" min="0" max="100" value="50" class="slider-input" aria-label="Comparison slider control">
+                <div class="slider-button"></div>
+            </div>
+
+            <!-- Thanh điều hướng / Chọn cặp ảnh để so sánh -->
+            <div class="comparison-selector">
+                <!-- Dùng data-camera và data-iphone để lưu đường dẫn ảnh tương ứng -->
+                <button class="select-thumb active" 
+                        data-camera="./photos/camera/photo1.jpg" 
+                        data-iphone="./photos/i-phone/photo1.jpg">
+                    <img src="./photos/camera/photo1.jpg" alt="Thumb 1">
+                    <span>Góc chụp 01</span>
+                </button>
+
+                <button class="select-thumb" 
+                        data-camera="./photos/camera/photo2.jpg" 
+                        data-iphone="./photos/i-phone/photo2.jpg">
+                    <img src="./photos/camera/photo2.jpg" alt="Thumb 2">
+                    <span>Góc chụp 02</span>
+                </button>
+
+                <button class="select-thumb" 
+                        data-camera="./photos/camera/photo3.jpg" 
+                        data-iphone="./photos/i-phone/photo3.jpg">
+                    <img src="./photos/camera/photo3.jpg" alt="Thumb 3">
+                    <span>Góc chụp 03</span>
+                </button>
+            </div>
+        </section>
+
     </main>
 
     <script src="javascript.js"></script>
